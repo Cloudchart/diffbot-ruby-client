@@ -4,6 +4,7 @@ module Diffbot
     # Diffbot PageClassifier API class
     class Analyze < GenericAPI
       ALLOWED_PARAMS = [:mode, :fields, :stats]
+      DEFAULT_VERSION = 22
 
       # Initializes a new Analyze API object
       #
@@ -11,6 +12,7 @@ module Diffbot
       # @param options [Hash]
       # @return [Diffbot::APIClient::Analyze]
       def initialize client, options = {}
+        @version = options.delete(:version) || DEFAULT_VERSION
         super(client, options)
       end
 
@@ -18,7 +20,7 @@ module Diffbot
       #
       # @return [String]
       def path
-        "v22/analyze"
+        "v#{@version}/analyze"
       end
 
       private
